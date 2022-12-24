@@ -10,14 +10,15 @@ game2(){
   ans6=("you leave them because they are family." "stay with them till the problem is solved or call the police." "keep defending the girl eventhough you know she is wrong.")
   
   level=1
+  qnum=1
   ans=("${ans1[@]}")
   
-  until((level>6))
+  until((qnum>6))
   do
-    printf '\nLevel %d:\tscore: %d\n%d- %s\n\ta- %s\n\tb- %s\n\tc- %s\n\n' "$level" "$score" "$level" "${questions[((level-1))]}" "${ans[@]}"
+    printf '\nLevel %d:\tscore: %d\n%d- %s\n\ta- %s\n\tb- %s\n\tc- %s\n\n' "$level" "$score" "$qnum" "${questions[((qnum-1))]}" "${ans[@]}"
     read -p "Enter your reaction: " react
     
-    case $level in
+    case $qnum in
       1)
         case $react in
           a)
@@ -114,6 +115,7 @@ game2(){
         ;;
     esac
     ((level=level+1))
+    ((qnum=qnum+1))
   done
 }
 
