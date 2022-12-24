@@ -1,0 +1,152 @@
+#!/bin/bash
+
+game2(){
+  questions=("You are walking to your home and you notice a girl and it looks like she is trying to escape from a man. What will you do?" "Your thoughts was right and the man is trying to block the girl preventing her from escaping. What will be your reaction?" "How will you try to help the girl?" "While you listen to the problem you understand that the girl is doing some thing wrong and you conclude that the man is very aggressive and he might hurt the girl. What will be your reaction?" "While you are trying to calm him down he tells you that he is a member of her family and wants you to go away and leave them. Your reaction?" "If the man said the truth but the girl is still afraid of him. Your reaction?")
+  ans1=("continue on your way." "ask her what is wrong." "you start to slow down to know what will happen.")
+  ans2=("watch and tell your self that is not your business." "record a video of what is happening to post it to social media." "try to help the girl.")
+  ans3=("you will try to keep the man away form the girl until you understand what is happening." "you try to attack the man." "you call the police.")
+  ans4=("help the girl to escape." "talk to the man to calm him down as much as you can." "attak the man.")
+  ans5=("ask the girl about what the man said if is it true and  if she agree with him in what he wants." "belive him and do what he wants." "does not belive him and stay to defend the girl.")
+  ans6=("you leave them because they are family." "stay with them till the problem is solved or call the police." "keep defending the girl eventhough you know she is wrong.")
+  
+  level=1
+  ans=("${ans1[@]}")
+  
+  until((level>6))
+  do
+    printf '\nLevel %d:\tscore: %d\n%d- %s\n\ta- %s\n\tb- %s\n\tc- %s\n\n' "$level" "$score" "$level" "${questions[((level-1))]}" "${ans[@]}"
+    read -p "Enter your reaction: " react
+    
+    case $level in
+      1)
+        case $react in
+          a)
+            echo 'You continued your way to home.'
+            echo 'Game Over...'
+            break;;
+          b)
+            echo 'the man answered with denial for your question and asked you to continue on your way'
+            echo '    -1 score'
+            ((score=score-1));;
+          c)
+            echo '    +1 score'
+            ((score=score+1));;
+        esac
+        ans=("${ans2[@]}")
+        ;;
+      2)
+        
+        case $react in
+          a)
+            echo 'You continued your way to home.'
+            echo 'Game Over...'
+            break;;
+          b)
+            echo 'after several seconds you felt guilt toward the girl and decided to help her as the situation is escalating'
+            echo '    -1 score'
+            ((score=score-1));;
+          c)
+            echo '    +1 score'
+            ((score=score+1));;
+        esac
+        ans=("${ans3[@]}")
+        ;;
+      3)
+        case $react in
+          a)
+            echo '    +1 score'
+            ((score=score+1));;
+          b)
+            echo 'Acting all agrisive is not a solution.'
+            echo 'Game Over...'
+            break;;
+          c)
+            echo 'calling the police now made the man more angry and agrisive which made the situation more difficult.'
+            echo '    -1 score'
+            ((score=score-1));;
+        esac
+        ans=("${ans4[@]}")
+        ;;
+      4)
+        case $react in
+          a)
+            echo 'the man noticed what you are trying to do and block your way becoming more agrisive.'
+            echo '    -1 score'
+            ((score=score-1));;
+          b)
+            echo '    +1 score'
+            ((score=score+1));;
+          c)
+            echo 'Acting all agrisive is not a solution.'
+            echo 'Game Over...'
+            break;;
+        esac
+        ans=("${ans5[@]}")
+        ;;
+      5)
+        case $react in
+          a)
+            echo '    +1 score'
+            ((score=score+1));;
+          b)
+            echo 'You left them and continued your way to home.'
+            echo 'Game Over...'
+            break;;
+          c)
+            echo 'Not believing the man made him more angry.'
+            echo '    -1 score'
+            ((score=score-1));;
+          esac
+        ans=("${ans6[@]}")
+        ;;
+      6)
+        case $react in
+          a)
+            echo 'You left them and continued your way to home.'
+            echo 'Game Over...'
+            break;;
+          b)
+            echo 'You waited until the police arrived then you left leaving this problem for the police to solve.   +1 score'
+            ((score=score+1));;
+          c)
+            echo 'poor decision';;
+          esac
+        ;;
+    esac
+    ((level=level+1))
+  done
+}
+
+center() {
+  termwidth="$(tput cols)"
+  padding="$(printf '%0.1s' -{1..500})"
+  printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "${1}" 0 "$(((termwidth-1-${#1})/2))" "$padding"
+}
+
+title="TASALY"
+score=0
+
+center ${title} 
+
+while((1))
+do
+  printf '\nA5tar El l3ba Ely Enta 3ayzha :-\n'
+  echo current score: $score
+  printf '\n\t1-Fnon(Aflam,Masr7yat w Moslsalat) --> IN Arabic\n'
+  printf '\t2-Mawkf 7a2i2y W N4of Rd F3lk --> IN English\n'
+  printf '\t3-Mn Klma W Nos --> IN Franko\n'
+  printf '\t4-Exit\n\n'
+  read -p "Da5al Rkm El l3ba ely 3ayzha ---> " x 
+  case $x in
+    1)
+      echo game 1;;
+    2)
+      game2;;
+    3)
+      echo game 3;;
+    4)
+      break;;
+    *)
+      echo 'invalid input.';;
+  esac
+done
